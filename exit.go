@@ -4,6 +4,10 @@ import "os"
 
 type hooks []func()
 
+// Register hooks that will be run before the
+// client terminates. These will only be run
+// if RunHooks == true (by default) when no panic occurs
+// or RunHooksOnPanic == true (by default) when panic occurrs.
 func (h *hooks) Register(f func()) {
 	*h = append(*h, f)
 }
