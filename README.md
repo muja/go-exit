@@ -4,7 +4,7 @@ Exit - Modify your app's termination behaviour.
 # Table of contents
 
 1. Introduction
-2. Examples
+2. Usage
 3. Contributing
 4. Reporting bugs
 
@@ -18,7 +18,7 @@ or you want to recover from a panic and exit gracefully.
 There are numerous things that you might want to do, without having to
 cluster your main function with all this logic.
 
-# 2. Examples
+# 2. Usage
 
 ```go
 package main
