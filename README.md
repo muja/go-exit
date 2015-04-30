@@ -1,5 +1,5 @@
-Exit - Modify your app's termination behaviour.
-===============================================
+Exit - Configure your app's termination behaviour.
+==================================================
 
 # Table of contents
 
