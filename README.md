@@ -26,21 +26,21 @@ package main
 import (
   "os"
   "github.com/muja/go-exit"
-  "fmt"
+  "log"
 )
 
 func main() {
   // Make sure we exit via the configurable exit module.
   defer exit.Exit()
 
-  // You might register a panic hook that gets called in the Exit()
-  // function when the application panics, for example:
-  exit.PanicHook = func(i interface{}) {
-    fmt.Fprintf(os.Stderr, "Fatal error occurred: %v\n", i)
-  }
+  // Enable recovering from panics:
+  exit.Recover = true
 
-  // You can also disable recovering from panics altogether:
-  exit.Recover = false
+  // You might register a panic hook that gets called in the Exit()
+  // function when the application panics, for example, the default hook:
+  exit.PanicHook = func(i interface{}) {
+    log.Printf("Fatal error: %v\n", i)
+  }
 
   // Set the status code (by default this is 0)
   exit.Status = 2
