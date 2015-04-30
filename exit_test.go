@@ -6,6 +6,7 @@ import (
 
 func TestRunHooksOnPanic(t *testing.T) {
 	defer lastBreath()
+	Recover = true
 	RunHooksOnPanic = false
 	Hooks.Register(func() {
 		t.Error("Hook was run on panic.")

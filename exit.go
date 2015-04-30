@@ -1,6 +1,9 @@
 package exit
 
-import "os"
+import (
+  "os"
+  "log"
+)
 
 type hooks []func()
 
@@ -13,7 +16,7 @@ func (h *hooks) Register(f func()) {
 }
 
 // Whether the exit should recover from panics
-var Recover = true
+var Recover = false
 
 // The status code the client will terminate with
 // (when no panic occurred.) Can be set any time.
@@ -35,14 +38,18 @@ var RunHooksOnPanic = true
 
 // A hook that will be run if a panic has occurred.
 // The value passed to panic will be passed here.
-var PanicHook = func(i interface{}) {}
+var PanicHook = func(i interface{}) {
+	log.Printf("Fatal error: %v\n", i)
+}
 
 func lastBreath() {
 	if Recover {
 		if r := recover(); r != nil {
 			RunHooks = RunHooksOnPanic
 			Status = StatusOnPanic
-			PanicHook(r)
+			if PanicHook != nil {
+				PanicHook(r)
+			}
 		}
 	}
 	if RunHooks {
